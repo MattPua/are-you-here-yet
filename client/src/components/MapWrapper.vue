@@ -12,10 +12,36 @@ import axios from 'axios';
 import io from 'socket.io-client';
 import { User, Position } from './../class/user';
 import { guidGenerator } from './../class/helper';
+import mapboxgl from 'mapbox-gl';
 
 // declare var MapboxDirections: any;
 declare var process: any; 
-declare var mapboxgl: any;
+// declare namespace mapboxgl {
+//   export class Marker {
+//     constructor(x: any)
+//     markerId: string;
+//     userId: string | undefined;
+//     setLngLat(x: any)
+//     addTo(x: any)
+//     setPopup(x: any)
+//     addControl( x: any)
+//   }
+//   export class Popup {
+//     constructor(x: any)
+//     setHTML(x: any)
+//   }
+//   export class Map {
+//     constructor(x:any)
+//     flyTo(x: any)
+//     addControl(x: any, y: any)
+//   }
+//   export class GeolocateControl {
+//     constructor(x: any)
+//   }
+//   export class NavigationControl {
+//     constructor()
+//   }
+// }
 
 
 // const MapboxGeocoder = require('@mapbox/mapbox-gl-geocoder');

@@ -10,9 +10,11 @@
     "deploy": "node ./node_modules/vue-gh-pages/index.js"
   },
   "dependencies": {
+    "@types/mapbox-gl": "^0.45.0",
     "@types/socket.io-client": "^1.4.32",
     "any-observable": "^0.3.0",
     "axios": "^0.18.0",
+    "mapbox-gl": "^0.46.0",
     "register-service-worker": "^1.0.0",
     "rxjs": "^6.2.1",
     "socket.io": "^2.1.0",

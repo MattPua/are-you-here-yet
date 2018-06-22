@@ -2,10 +2,12 @@
   "name": "are-you-here-yet",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/mattpua/are-you-here-yet",
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy": "node ./node_modules/vue-gh-pages/index.js"
   },
   "dependencies": {
     "@types/socket.io-client": "^1.4.32",

@@ -1,0 +1,30 @@
+@import '_colors';
+
+body {
+    font-size: 14px;
+}
+
+input {
+  display: block;
+  border-radius: 50px;
+  border: 0.1px solid #707070;
+  padding: 2% 8%;
+  @media (min-width: 600px) {
+    padding: 10px 20px;
+  }
+}
+
+button {
+  border-radius: 50px;
+  color: white;
+  background-color: $secondary;
+  text-align: center;
+  border: 0;
+  cursor: pointer;
+
+  &:disabled {
+    background-color: gray;
+    color: white;
+    cursor: not-allowed;
+  }
+}

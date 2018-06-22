@@ -13,11 +13,12 @@ import io from 'socket.io-client';
 import { User, Position } from './../class/user';
 import { guidGenerator } from './../class/helper';
 
-declare var mapboxgl: any;// = require('mapbox-gl/dist/mapbox-gl.js');
-declare var MapboxDirections: any;
+// declare var MapboxDirections: any;
+declare var process: any; 
+declare var mapboxgl: any;
+
 
 // const MapboxGeocoder = require('@mapbox/mapbox-gl-geocoder');
-
 @Component({
     props: {
       users: {
@@ -29,15 +30,6 @@ declare var MapboxDirections: any;
         type: Boolean,
         default: () => {
           return false;
-        }
-      }
-    },
-    watch: {
-      canGetLocation: {
-        handler(val) {
-          if (this.canGetLocation) {
-            this.getCurrentLocationByNavigator();
-          }
         }
       }
     }
@@ -72,6 +64,9 @@ export default class MapWrapper extends Vue {
     this.$watch('users', (newVal, oldVal) => {
       this.updateMarkers(newVal);
     });
+    this.$watch('canGetLocation', (newVal, oldVal) => {
+      if (newVal) this.getCurrentLocationByNavigator();
+    })
   }
   // After content placed in the page
   mounted() {
@@ -137,7 +132,7 @@ export default class MapWrapper extends Vue {
       else {
         const markerElem = document.createElement('div');
         const innerMarker = document.createElement('div');
-        const splitName: string[] = user.name.split(' ');
+        const splitName: string[] = user.name ? user.name.split(' ') : [];
         markerElem.className = 'custom-marker';
         innerMarker.className = 'inner-content';
         innerMarker.textContent = splitName[0][0].toUpperCase() + (splitName.length > 1 ? splitName[1][0].toUpperCase() : '');

@@ -2,7 +2,7 @@
   "name": "are-you-here-yet",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/mattpua/are-you-here-yet",
+  "homepage": "git@github.com:MattPua/are-you-here-yet",
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "build": "vue-cli-service build",

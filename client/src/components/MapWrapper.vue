@@ -12,37 +12,15 @@ import axios from 'axios';
 import io from 'socket.io-client';
 import { User, Position } from './../class/user';
 import { guidGenerator } from './../class/helper';
-import mapboxgl from 'mapbox-gl';
+import mapboxgl,{ LngLat, LngLatLike } from 'mapbox-gl';
+
+class Marker extends mapboxgl.Marker {
+  userId: string = '';
+  // markerId: string = '';
+}
 
 // declare var MapboxDirections: any;
 declare var process: any; 
-// declare namespace mapboxgl {
-//   export class Marker {
-//     constructor(x: any)
-//     markerId: string;
-//     userId: string | undefined;
-//     setLngLat(x: any)
-//     addTo(x: any)
-//     setPopup(x: any)
-//     addControl( x: any)
-//   }
-//   export class Popup {
-//     constructor(x: any)
-//     setHTML(x: any)
-//   }
-//   export class Map {
-//     constructor(x:any)
-//     flyTo(x: any)
-//     addControl(x: any, y: any)
-//   }
-//   export class GeolocateControl {
-//     constructor(x: any)
-//   }
-//   export class NavigationControl {
-//     constructor()
-//   }
-// }
-
 
 // const MapboxGeocoder = require('@mapbox/mapbox-gl-geocoder');
 @Component({
@@ -61,8 +39,8 @@ declare var process: any;
     }
 })
 export default class MapWrapper extends Vue {
-  private map: mapboxgl.Map;
-  private markers: mapboxgl.Marker[] = [];
+  private map!: mapboxgl.Map;
+  private markers: Marker[] = [];
   private hasCenteredMapOnUserLocation: boolean = false;
 
   private mapBoxConfig = {
@@ -137,10 +115,10 @@ export default class MapWrapper extends Vue {
     }
   }
 
-  private createMarker(user: User, elementRef: any): mapboxgl.Marker {
-    let marker = new mapboxgl.Marker(elementRef)
-    marker.markerId = guidGenerator();
-    marker.userId = user.id;
+  private createMarker(user: User, elementRef: any): Marker {
+    let marker = new Marker(elementRef)
+    // marker.markerId = guidGenerator();
+    if (user.id) marker.userId = user.id;
     if (user.position) marker = marker.setLngLat([user.position.lng, user.position.lat]);
     marker.setPopup(new mapboxgl.Popup({ closeOnClick: false, offset: 25}).setHTML('<h3>' + user.name + '</h3>'));
     marker.addTo(this.map);
@@ -150,10 +128,11 @@ export default class MapWrapper extends Vue {
 
   private updateMarkers(users: User[]) {
     this.markers = users.filter((u: User) => u.position && u.position.lat).map((user) => {
-      let marker: mapboxgl.Marker;
-      if (this.markers.find(((m:mapboxgl.Marker) => m.userId === user.id))) {
-        marker = this.markers.find((m:mapboxgl.Marker) => m.userId === user.id);
-        marker.setLngLat([user.position.lng, user.position.lat]);
+      let marker: Marker | any;
+      if (this.markers.find(((m:Marker) => m.userId === user.id))) {
+        marker = this.markers.find((m:Marker) => m.userId === user.id);
+        const latLng: LngLatLike = [user.position.lng, user.position.lat];
+        marker.setLngLat(latLng);
       }
       else {
         const markerElem = document.createElement('div');

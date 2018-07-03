@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.3.0/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.cbe2488a323ea495d59c727ab8672087.js"
+  "/precache-manifest.09cce2d515bcfe9e964be3d8121c1571.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "are-you-here-yet"});

@@ -1,6 +1,9 @@
 import io from 'socket.io-client';
 import {User} from '@/class/user';
 import { Subject } from 'rxjs';
+
+declare var process: any; 
+
 export default class SocketClient {
     socket: SocketIOClient.Socket;
 
@@ -24,7 +27,7 @@ export default class SocketClient {
   
 
     constructor() {
-        this.socket = io.connect('http://localhost:3000');
+        this.socket = io.connect(process.env.VUE_APP_SOCKET_URL);
     }
     
 
